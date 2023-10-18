@@ -3,6 +3,7 @@
     "dockerComposeFile": "./compose.yml",
     "service": "dev",
     "workspaceFolder": "/workspace",
+    "postCreateCommand": "sh /workspace/github.com/kasaikou/kasaikou/.devcontainer/postCreateCommand.sh",
     "customizations": {
         "vscode": {
             "extensions": [
