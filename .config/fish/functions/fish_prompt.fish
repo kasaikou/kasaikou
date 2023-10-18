@@ -1,5 +1,11 @@
 function fish_prompt
+  set_color cyan
+  printf '%s' (pwd)
   # Git
   set last_status $status
-  echo -n (set_color cyan)(pwd)(set_color green)(__fish_git_prompt)(set_color normal)'❯ '
+  set_color green
+  printf '%s' (__fish_git_prompt)
+  
+  set_color normal
+  printf '❯ '
 end
