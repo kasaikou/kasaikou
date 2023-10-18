@@ -1,0 +1,27 @@
+name: github-com_kasaikou
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        - apt_mirror=${APT_MIRROR:-archive.ubuntu.com}
+        - username=${USER}
+        - uid=${UID}
+        - gid=${GID}
+    command: sh /run.sh
+    privileged: true
+    tty: true
+    user: ${USER}
+    volumes:
+      - src:/workspace
+      - ../:/workspace/github.com/kasaikou/kasaikou/
+      - ../.config/fish/:/home/${USER}/.config/fish/
+      - ../.bashrc:/home/${USER}/.bashrc
+      - /run/user/${UID}/gnupg:/run/user/${UID}/gnupg
+    environment:
+      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+    env_file:
+      - .env
+volumes:
+  src:
