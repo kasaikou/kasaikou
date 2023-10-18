@@ -9,10 +9,20 @@
             "extensions": [
                 "eamodio.gitlens",
                 "mhutchie.git-graph",
-                "chrisdias.vscode-opennewinstance"
+                "chrisdias.vscode-opennewinstance",
+                "redhat.vscode-yaml",
+                "EditorConfig.EditorConfig"
             ],
             "settings": {
-                "git.enableCommitSigning": true
+                "git.enableCommitSigning": true,
+                "yaml.schemas": {
+                    "https://taskfile.dev/schema.json": [
+                        "**/Taskfile.yml",
+                        "**/taskfile.yml",
+                        "**/Taskfile.yaml",
+                        "**/taskfile.yaml"
+                    ]
+                }
             }
         }
     }
