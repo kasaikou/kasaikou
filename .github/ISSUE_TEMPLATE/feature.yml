@@ -1,0 +1,22 @@
+name: 🚀 Change features
+description: Create/Update/Delete features
+title: "[Category]:[Title]"
+labels: "enhancement"
+body:
+  - type: textarea
+    attributes:
+      label: Abstract
+      placeholder: Write abustract of this issue here...
+  - type: textarea
+    attributes:
+      label: Backgrounds
+  - type: textarea
+    attributes:
+      label: Tasks
+      value: |
+        - [ ] 
+  - type: textarea
+    attributes:
+      label: Tips and References
+      value: |
+        - 
