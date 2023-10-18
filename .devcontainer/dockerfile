@@ -19,7 +19,26 @@ RUN sed -i "s@archive.ubuntu.com@${apt_mirror}@g" /etc/apt/sources.list && \
     gnupg=2.2.27-3ubuntu2.1 \
     apt-transport-https=2.4.10 \
     software-properties-common=0.99.22.7 \
-    build-essential=12.9ubuntu3
+    build-essential=12.9ubuntu3 \
+    # for chrome-browser
+    libglib2.0-0=2.72.4-0ubuntu2.2 \
+    libnss3=2:3.68.2-0ubuntu1.2 \
+    libatk1.0-0=2.36.0-3build1 \
+    libatk-bridge2.0-0=2.38.0-3 \
+    libcups2=2.4.1op1-1ubuntu4.7 \
+    libdrm2=2.4.113-2~ubuntu0.22.04.1 \
+    libxkbcommon0=1.4.0-1 \
+    libxcomposite1=1:0.4.5-1build2 \
+    libxdamage1=1:1.1.5-2build2 \
+    libxfixes3=1:6.0.0-1 \
+    libxrandr2=2:1.5.2-1build1 \
+    libgbm1=23.0.4-0ubuntu1~22.04.1 \
+    libpango-1.0-0=1.50.6+ds-2ubuntu1 \
+    libcairo2=1.16.0-5ubuntu2 \
+    libasound2=1.2.6.1-1ubuntu1 \
+    fonts-ipaexfont-mincho=00401-3ubuntu1 \
+    poppler-utils=22.02.0-2ubuntu0.2 \
+    ghostscript=9.55.0~dfsg1-0ubuntu5.5
 
 # Docker and Compose (for DooD)
 # hadolint ignore=DL3009
@@ -52,6 +71,8 @@ RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg -
     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add - && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list && \
     sudo apt-get update && sudo apt-get install -y --no-install-recommends nodejs=18.18.2-1nodesource1 yarn=1.22.19-1
+
+RUN yarn global add press-ready
 
 ARG username
 ARG useruid
