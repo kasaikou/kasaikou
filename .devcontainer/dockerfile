@@ -86,3 +86,4 @@ RUN groupadd --gid ${usergid} ${username} && \
 COPY ./run.sh /
 
 USER ${username}
+ENV PATH=${PATH}:/home/${username}/go/bin
