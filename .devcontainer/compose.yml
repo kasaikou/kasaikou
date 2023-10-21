@@ -18,6 +18,8 @@ services:
       - ../:/workspace/github.com/kasaikou/kasaikou/
       - ../.config/fish/:/home/${USER}/.config/fish/
       - ../.bashrc:/home/${USER}/.bashrc
+      - gohome:/home/${USER}/go
+      - homecache:/home/${USER}/.cache
       - /run/user/${UID}/gnupg:/run/user/${UID}/gnupg
       - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
     environment:
@@ -26,3 +28,5 @@ services:
       - .env
 volumes:
   src:
+  gohome:
+  homecache:
