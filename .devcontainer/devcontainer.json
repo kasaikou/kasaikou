@@ -2,8 +2,8 @@
     "name": "kasaikou",
     "dockerComposeFile": "./compose.yml",
     "service": "dev",
-    "workspaceFolder": "/workspace",
-    "postCreateCommand": "sh /workspace/github.com/kasaikou/kasaikou/.devcontainer/postCreateCommand.sh",
+    "workspaceFolder": "${localWorkspaceFolder}",
+    "postCreateCommand": "sh ${localWorkspaceFolder}/.devcontainer/postCreateCommand.sh",
     "customizations": {
         "vscode": {
             "extensions": [

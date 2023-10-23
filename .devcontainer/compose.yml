@@ -15,7 +15,7 @@ services:
     user: ${USER}
     volumes:
       - src:/workspace
-      - ../:/workspace/github.com/kasaikou/kasaikou/
+      - ${WORKSPACE_DIR}:${WORKSPACE_DIR}
       - ../.config/fish/:/home/${USER}/.config/fish/
       - ../.bashrc:/home/${USER}/.bashrc
       - /run/user/${UID}/gnupg:/run/user/${UID}/gnupg
