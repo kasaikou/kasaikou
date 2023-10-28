@@ -20,6 +20,12 @@ services:
       - ../.bashrc:/home/${USER}/.bashrc
       - /run/user/${UID}/gnupg:/run/user/${UID}/gnupg
       - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
     environment:
       - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
     env_file:

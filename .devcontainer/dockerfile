@@ -3,7 +3,7 @@ ARG useruid=1000
 ARG usergid=1000
 ARG apt_mirror=archive.ubuntu.com
 
-FROM ubuntu:22.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu22.04
 
 ENV DEBIAN_FRONTEND=nointeractive
 ARG apt_mirror
