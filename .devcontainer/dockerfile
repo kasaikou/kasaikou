@@ -64,6 +64,9 @@ RUN wget -O go.tar.gz https://go.dev/dl/go${go}.linux-amd64.tar.gz && \
     rm -rf go.tar.gz
 ENV PATH=${PATH}:/usr/local/go/bin
 
+# act
+RUN curl -s https://raw.githubusercontent.com/nektos/act/master/install.sh | bash
+
 # Node and Yarn
 RUN curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | \
