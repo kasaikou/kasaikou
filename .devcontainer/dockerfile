@@ -40,6 +40,11 @@ RUN sed -i "s@archive.ubuntu.com@${apt_mirror}@g" /etc/apt/sources.list && \
     poppler-utils=22.02.0-2ubuntu0.2 \
     ghostscript=9.55.0~dfsg1-0ubuntu5.5
 
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.0-1_all.deb && \
+    dpkg -i cuda-keyring_1.0-1_all.deb && \
+    apt-get update && \
+    apt-get -y install libcutensor1 libcutensor-dev libcutensor-doc
+
 # Docker and Compose (for DooD)
 # hadolint ignore=DL3009
 RUN install -m 0755 -d /etc/apt/keyrings && \
