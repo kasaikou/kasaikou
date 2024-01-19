@@ -1,18 +1,18 @@
-ARG username=vscode
-ARG useruid=1000
-ARG usergid=1000
+ARG user
+ARG uid
+ARG gid
 ARG base
 
 FROM ${base}
 
-ARG username
-ARG useruid
-ARG usergid
+ARG user
+ARG uid
+ARG gid
 
-RUN groupadd --gid ${usergid} ${username} && \
-    useradd -s /bin/bash --uid ${useruid} --gid ${usergid} -m ${username} && \
-    echo ${username} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${username} && \
-    chmod 0440 /etc/sudoers.d/${username}
+RUN groupadd --gid ${gid} ${user} && \
+    useradd -s /bin/bash --uid ${uid} --gid ${gid} -m ${user} && \
+    echo ${user} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${user} && \
+    chmod 0440 /etc/sudoers.d/${user}
 
 USER ${username}
 ENV PATH=${PATH}:/home/${username}/go/bin
