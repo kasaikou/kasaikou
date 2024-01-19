@@ -20,6 +20,7 @@ services:
       - ./.config/fish/:/home/${USER}/.config/fish/
       - ./.config/pypoetry/:/home/${USER}/.config/pypoetry/
       - ./.bashrc:/home/${USER}/.bashrc
+      - ./cmd/:/cmd/
       - gohome:/home/${USER}/go
       - homecache:/home/${USER}/.cache
       - /run/user/${UID}/gnupg:/run/user/${UID}/gnupg
