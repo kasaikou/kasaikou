@@ -1,9 +1,9 @@
 ARG username=vscode
 ARG useruid=1000
 ARG usergid=1000
-ARG apt_mirror=archive.ubuntu.com
+ARG base
 
-FROM ghcr.io/kasaikou/shared-dev-container:latest-cuda11.8.0-devel-ubuntu22.04
+FROM ${base}
 
 ARG username
 ARG useruid
@@ -13,8 +13,6 @@ RUN groupadd --gid ${usergid} ${username} && \
     useradd -s /bin/bash --uid ${useruid} --gid ${usergid} -m ${username} && \
     echo ${username} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${username} && \
     chmod 0440 /etc/sudoers.d/${username}
-
-COPY ./run.sh /
 
 USER ${username}
 ENV PATH=${PATH}:/home/${username}/go/bin
