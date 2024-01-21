@@ -1,0 +1,63 @@
+name: github-com_kasaikou_kasaikou
+services:
+  wsl2_cuda_host:
+    profiles: [ wsl2_cuda_host ]
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        - base=${BASE_IMAGE:-ghcr.io/kasaikou/shared-dev-container:latest-cuda11.8.0-devel-ubuntu22.04}
+        - user=${USER}
+        - uid=${UID}
+        - gid=${GID}
+    command: sleep infinity
+    privileged: true
+    tty: true
+    user: ${USER}
+    volumes:
+      - ${WORKSPACE_DIR}:${WORKSPACE_DIR}
+      - /home/${USER}/.gnupg:/home/${USER}/.gnupg
+      - ./.config/fish/:/home/${USER}/.config/fish/
+      - ./.config/pypoetry/:/home/${USER}/.config/pypoetry/
+      - ./.bashrc:/home/${USER}/.bashrc
+      - ./cmd/:/cmd/
+      - gohome:/home/${USER}/go
+      - homecache:/home/${USER}/.cache
+      - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
+      - ${TMP_X11_UNIX_HOST:-/tmp/.X11-unix}:/tmp/.X11-unix
+      - ${WINDOWS_MNT:-/mnt/}:/mnt/
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              capabilities: [ gpu ]
+    environment:
+      - SSH_AUTH_SOCK=${SSH_AUTH_SOCK}
+      - DISPLAY=${DISPLAY}
+      - PULSE_SERVER=${PULSE_SERVER}
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
+      - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+    tmpfs:
+      - /run/user/${UID}/
+    env_file:
+      - .env
+  initialize_volumes:
+    profiles: [ initialize_volumes ]
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        - base=${BASE_IMAGE:-ghcr.io/kasaikou/shared-dev-container:latest-ubuntu22.04}
+        - username=${USER}
+        - uid=${UID}
+        - gid=${GID}
+    command: sh /cmd/initialize_volumes.sh
+    user: ${USER}
+    volumes:
+      - ./cmd/:/cmd/
+      - gohome:/home/${USER}/go
+      - homecache:/home/${USER}/.cache
+volumes:
+  gohome:
+  homecache:

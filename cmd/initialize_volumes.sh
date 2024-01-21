@@ -11,7 +11,3 @@ for volume in "${HOME}/go/" "${HOME}/.cache/" "${HOME}/.config/pypoetry/"; do
         echo "owner_user ($owner_user) == current_user ($current_user) in $volume"
     fi
 done
-
-
-go install github.com/hashicorp/terraform@v1.6.1 && \
-go install github.com/go-task/task/v3/cmd/task@v3.31.0
