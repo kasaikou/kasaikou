@@ -14,9 +14,9 @@ RUN groupadd --gid ${gid} ${user} && \
     echo ${user} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${user} && \
     chmod 0440 /etc/sudoers.d/${user}
 
-USER ${username}
-ENV PATH=${PATH}:/home/${username}/go/bin
+USER ${user}
+ENV PATH=${PATH}:/home/${user}/go/bin
 
 # Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.6.1
-ENV PATH=${PATH}:/home/${username}/.local/bin
+ENV PATH=${PATH}:/home/${user}/.local/bin
