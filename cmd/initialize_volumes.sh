@@ -1,6 +1,6 @@
 #!/bin/sh
 
-for volume in "${HOME}/go/" "${HOME}/.cache/" "${HOME}/.config/pypoetry/"; do
+for volume in "${HOME}/go/" "${HOME}/.cache/" "${HOME}/.config/pypoetry/" "${HOME}/.config" "${HOME}/Unity"; do
     owner_user=`stat -c '%U' ${volume}`
     current_user=`whoami`
 

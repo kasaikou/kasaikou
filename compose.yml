@@ -22,10 +22,13 @@ services:
       - ./.bashrc:/home/${USER}/.bashrc
       - ./cmd/:/cmd/
       - gohome:/home/${USER}/go
+      - unity:/home/${USER}/Unity
       - homecache:/home/${USER}/.cache
+      - homeconfig:/home/${USER}/.config
       - ${DOCKER_SOCK:-/var/run/docker.sock}:/var/run/docker.sock
       - ${TMP_X11_UNIX_HOST:-/tmp/.X11-unix}:/tmp/.X11-unix
       - ${WINDOWS_MNT:-/mnt/}:/mnt/
+      - ${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}:${XDG_RUNTIME_DIR}/${WAYLAND_DISPLAY}
     deploy:
       resources:
         reservations:
@@ -38,6 +41,7 @@ services:
       - PULSE_SERVER=${PULSE_SERVER}
       - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
       - XDG_RUNTIME_DIR=${XDG_RUNTIME_DIR}
+      - XDG_CONFIG_HOME=/home/${USER}/.config
     tmpfs:
       - /run/user/${UID}/
     env_file:
@@ -49,7 +53,7 @@ services:
       dockerfile: dockerfile
       args:
         - base=${BASE_IMAGE:-ghcr.io/kasaikou/shared-dev-container:latest-ubuntu22.04}
-        - username=${USER}
+        - user=${USER}
         - uid=${UID}
         - gid=${GID}
     command: sh /cmd/initialize_volumes.sh
@@ -58,6 +62,10 @@ services:
       - ./cmd/:/cmd/
       - gohome:/home/${USER}/go
       - homecache:/home/${USER}/.cache
+      - homeconfig:/home/${USER}/.config
+      - unity:/home/${USER}/Unity
 volumes:
   gohome:
+  unity:
   homecache:
+  homeconfig:
