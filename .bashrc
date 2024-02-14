@@ -118,4 +118,4 @@ fi
 
 chmod 666 $(tty)
 export GPG_TTY=$(tty)
-exec fish
+eval "$(nodenv init -)"

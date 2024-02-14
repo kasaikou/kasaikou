@@ -9,14 +9,15 @@ ARG user
 ARG uid
 ARG gid
 
-RUN groupadd --gid ${gid} ${user} && \
-    useradd -s /bin/bash --uid ${uid} --gid ${gid} -m ${user} && \
+USER root
+
+RUN usermod -l ${user} container && \
+    groupmod -n ${user} container && \
+    usermod -d /home/${user} -m ${user} && \
+    usermod -u ${uid} ${user} && \
+    groupmod -g ${gid} ${user} && \
     echo ${user} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${user} && \
     chmod 0440 /etc/sudoers.d/${user}
 
 USER ${user}
-ENV PATH=${PATH}:/home/${user}/go/bin
-
-# Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.6.1
-ENV PATH=${PATH}:/home/${user}/.local/bin
+ENV PATH=/home/${user}/go/bin:${PATH}
